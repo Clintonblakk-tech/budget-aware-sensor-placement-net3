@@ -1,7 +1,9 @@
-﻿cff-version: 1.2.0
+cff-version: 1.2.0
 message: "If you use this software or its associated research outputs, please cite this repository."
-title: "Budget-Aware Explainable Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks"
+title: "Budget-Aware Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks"
 type: software
+version: 1.0.0
+license: MIT
 authors:
   - family-names: Blakk
     given-names: Clinton Jengoa
