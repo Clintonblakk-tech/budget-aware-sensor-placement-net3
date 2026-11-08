@@ -2,14 +2,11 @@
 
 ## 1. Experiment identification
 
-This protocol documents the Net3 junction-only budget-sensitivity
-experiment for the manuscript:
+This protocol documents the Net3 junction-only budget-sensitivity experiment:
 
-"Budget-Aware Explainable Deep Reinforcement Learning for Sensor
-Placement in Water Distribution Networks."
+**Budget-Aware Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks**
 
-The experiment evaluates DQN-based sensor placement under sensor
-budgets of 3, 5 and 8.
+The experiment evaluates DQN-based sensor placement under sensor budgets of 3, 5 and 8.
 
 ## 2. Network preparation
 
@@ -189,16 +186,10 @@ the repository copies.
 
 ## 10. Reproduction limitations
 
-The repository documents the recorded experiment and preserves
-its outputs. Exact reproduction on another computer may depend on
-operating-system configuration, package availability, EPANET
-runtime installation and access to the original Net3 INP file.
+The repository documents the recorded experiment and preserves its outputs. Exact reproduction on another computer may depend on operating-system configuration, package availability and compatibility, EPANET runtime installation, and the execution environment.
 
-The original raw EPANET water-quality trajectories and all
-event-specific generated input files were not retained as a
-complete archive. Consequently, the preserved run-level and
-event-level outputs support result inspection, but do not by
-themselves provide every intermediate simulation state.
+The original Net3 INP benchmark file is included in the repository, with its SHA-256 fingerprint documented in the experiment manifest.
 
-The experiment manifest and audit record should be consulted
-before attempting a reproduction.
+The original raw EPANET water-quality trajectories and all event-specific generated input files were not retained as a complete archive. Consequently, the preserved run-level and event-level outputs support result inspection, but do not by themselves provide every intermediate simulation state.
+
+The experiment manifest and audit record should be consulted before attempting a reproduction.

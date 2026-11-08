@@ -2,11 +2,13 @@
 
 ## 1. Purpose
 
-This document describes the CSV files supplied with the Net3 junction-only, budget-aware DQN sensor-placement experiment. It defines the recorded fields and explains the level of observation represented by each dataset.
+This document describes the CSV files supplied with the Net3 junction-only, budget-aware DQN sensor-placement experiment. It defines the recorded fields and explains the unit of observation represented by each dataset.
 
-The experimental design contains three sensor budgets (3, 5 and 8), ten trained runs per budget, and twenty contamination-event evaluations per trained run.
+The experimental design contains three sensor budgets (3, 5 and 8), ten trained runs per budget, and twenty contamination-event evaluations per trained run. The five-sensor configuration serves as the reference budget (100%). Accordingly, the three budgets correspond to nominal budget percentages of 60%, 100% and 160%, respectively.
 
-## 2. Main experimental result files
+The experiment therefore comprises 30 trained DQN runs and 600 contamination-event evaluation records.
+
+## 2. Main Experimental Result Files
 
 ### 2.1 net3_junction_only_run_results.csv
 
@@ -17,24 +19,24 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | Network | Water distribution network used; Net3 in this experiment. |
 | CandidateSet | Permitted sensor-location set; Junction-only. |
 | Budget | Maximum number of sensors permitted in the placement. |
-| NominalBudgetPercent | Nominal budget expressed as a percentage relative to the reference budget. |
+| NominalBudgetPercent | Sensor budget expressed as a percentage of the five-sensor reference budget. |
 | Seed | Random seed identifier for the training run. |
 | Episodes | Number of DQN training episodes. |
-| BestReward | Best reward recorded during training. |
+| BestReward | Best training reward recorded for the run. |
 | FinalReward | Final recorded training reward. |
 | TrainingRuntimeEngineSeconds | Training runtime reported by the experiment engine, in seconds. |
 | TrainingRuntimeMeasuredSeconds | Independently measured elapsed training runtime, in seconds. |
-| Sensors | Sensor node identifiers selected by the trained model. |
+| Sensors | Identifiers of the junction nodes selected as sensor locations. |
 | SensorCount | Number of selected sensors. |
 | DetectedEvents | Number of evaluated contamination events detected. |
 | TotalEvents | Number of contamination events evaluated for the run. |
-| DetectionRatePercent | Percentage of evaluated events detected. |
-| MeanDetectionIndex | Mean first-detection index for successfully detected events. |
-| MeanDetectionTimeHours | Mean time to first detection, in hours, conditional on successful detection. |
+| DetectionRatePercent | Percentage of evaluated contamination events detected. |
+| MeanDetectionIndex | Mean first-detection index among successfully detected events. |
+| MeanDetectionTimeHours | Mean time to first detection, in hours, calculated only for successfully detected events. |
 | EventErrorCount | Number of contamination-event evaluation errors. |
 | ContaminationEvaluationRuntimeSeconds | Runtime used for the contamination-event evaluations, in seconds. |
 | TrainingStatus | Recorded completion status of the training run. |
-| TrainingError | Error information, if any; blank when no training error was recorded. |
+| TrainingError | Error information recorded for the training run; blank where no training error was recorded. |
 | RewardHistoryFile | Filename of the corresponding episode-level reward history. |
 | ModelWeightsFile | Filename of the saved DQN model weights. |
 
@@ -59,6 +61,8 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | EventRuntimeSeconds | Runtime for the individual event evaluation, in seconds. |
 | Error | Error information, if any; blank when no event error was recorded. |
 
+Blank values in `FirstDetectionIndex` and `FirstDetectionTimeHours` indicate that no detection occurred during the corresponding event evaluation. They should not be interpreted as zero-valued detection measurements.
+
 ### 2.3 net3_junction_only_summary.csv
 
 **Unit of observation:** One sensor-budget group summarising its ten trained runs.
@@ -66,7 +70,7 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | Field | Description |
 |---|---|
 | Budget | Sensor budget represented by the group. |
-| NominalBudgetPercent | Nominal budget percentage relative to the reference budget. |
+| NominalBudgetPercent | Nominal budget percentage relative to the five-sensor reference budget. |
 | Runs | Number of trained runs included in the group. |
 | MeanBestReward | Mean best training reward across runs. |
 | SDBestReward | Standard deviation of best training reward across runs. |
@@ -75,10 +79,10 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | MeanTrainingRuntimeSeconds | Mean measured training runtime, in seconds. |
 | SDTrainingRuntimeSeconds | Standard deviation of training runtime, in seconds. |
 | MeanDetectionRatePercent | Mean run-level detection rate, in percent. |
-| SDDetectionRatePercent | Standard deviation of run-level detection rate, in percentage points. |
+| SDDetectionRatePercent | Standard deviation of run-level detection rates, in percentage points. |
 | MeanDetectionIndex | Mean of the run-level mean detection indices. |
 | SDDetectionIndex | Standard deviation of the run-level mean detection indices. |
-| MeanDetectionTimeHours | Mean run-level mean detection time, in hours. |
+| MeanDetectionTimeHours | Mean of the run-level mean detection times, in hours, conditional on successful detection. |
 | SDDetectionTimeHours | Standard deviation of the run-level mean detection times, in hours. |
 | TotalDetectedEvents | Total detected contamination events across the group. |
 | TotalEvents | Total evaluated contamination events across the group. |
@@ -86,7 +90,7 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | MeanContaminationRuntimeSeconds | Mean contamination-evaluation runtime per run, in seconds. |
 | SDContaminationRuntimeSeconds | Standard deviation of contamination-evaluation runtime, in seconds. |
 
-## 3. Conventional statistical analysis files
+## 3. Conventional Statistical Analysis Files
 
 ### 3.1 descriptive_statistics.csv
 
@@ -136,7 +140,7 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | Holm_adjusted_P_value | P-value adjusted using the Holm procedure. |
 | Significant_after_Holm | Whether the adjusted p-value is below 0.05. |
 
-## 4. Statistical robustness files
+## 4. Statistical Robustness Files
 
 ### 4.1 overall_permutation_tests.csv
 
@@ -154,6 +158,8 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | PermutationExtremeCount | Number of permutation statistics at least as extreme as the observed statistic. |
 | MonteCarloSE | Estimated Monte Carlo standard error of the permutation p-value. |
 | EpsilonSquared | Epsilon-squared effect-size estimate. |
+
+The permutation count and extreme-count fields provide information for inspecting the Monte Carlo permutation analysis.
 
 ### 4.2 pairwise_exact_permutation_tests.csv
 
@@ -198,15 +204,14 @@ The experimental design contains three sensor budgets (3, 5 and 8), ten trained 
 | Minimum | Minimum observed value. |
 | Maximum | Maximum observed value. |
 
-## 5. Interpretation and statistical unit
+## 5. Interpretation and Statistical Unit
 
-The experiment contains 30 trained DQN runs: ten runs for each of the three sensor budgets. Each trained placement is evaluated against 20 contamination events, giving 600 event-level evaluation records.
+The experiment contains 30 trained DQN runs: ten runs for each of the three sensor budgets. Each trained placement is evaluated against 20 contamination events, producing 600 event-level evaluation records.
 
-The 600 event evaluations are nested within the 30 trained runs. They are not 600 independent training replicates. Comparisons between sensor budgets therefore use the ten run-level observations in each budget group.
+The 600 event evaluations are nested within the 30 trained runs. They are not 600 independent training replicates. Statistical comparisons between sensor budgets therefore use the ten run-level observations in each budget group.
 
-Detection time is conditional on successful detection. An event that was not detected has no first-detection time and is represented by a blank value in the event-level file.
+Detection time is conditional on successful detection. An event that was not detected has no first-detection time and is represented by a blank value in the event-level file. Such missing detection times must not be interpreted as zero.
 
 Concentration fields ending in `_kg_m3` are expressed in kilograms per cubic metre. In this experiment, the source concentration is 0.1 kg/m³ and the detection threshold is 0.01 kg/m³.
 
 The descriptive and conventional inferential files preserve the original asymptotic analysis. The robustness files provide permutation-based overall and pairwise analyses. These are complementary analyses of the same retained run-level observations, not additional independent experiments.
-

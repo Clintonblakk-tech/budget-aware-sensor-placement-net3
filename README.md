@@ -6,7 +6,11 @@ This repository contains the experimental implementation, trained models, experi
 
 The study investigates the effect of sensor installation budgets on contamination detection performance using the Net3 benchmark network.
 
-**Scope note:** The packaged experiment and results described in this README document budget-aware DQN sensor placement and contamination-detection evaluation. This README does not identify a specific explainability method or report explainability outputs. The word “Explainable” in the repository title should therefore not be taken, on the evidence documented here alone, as proof that an explainability method was implemented or evaluated. Any explainability claim should be supported by the corresponding source code, outputs and methodological documentation.
+ ### Research Context
+
+This software release presents **Budget-Aware Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks**. It provides a Python implementation of a Deep Q-Network (DQN) framework for investigating how different sensor installation budgets influence contamination detection performance in water distribution networks. Using the Net3 benchmark, the framework integrates trained models, experimental results, and statistical analyses to evaluate sensor placement strategies under three budgets: 3, 5, and 8 sensors.
+
+The release provides the software, experimental configurations, benchmark data, and supporting documentation needed to examine the implementation and reproduce the reported analyses.
 
 Three sensor budgets are evaluated:
 - 3 sensors
