@@ -1,0 +1,70 @@
+NET3 JUNCTION-ONLY BUDGET-SENSITIVITY EXPERIMENT
+PUBLIC REPRODUCIBILITY MANIFEST
+
+Paper title recorded for the experiment:
+Budget-Aware Explainable Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks
+
+Created: 2026-11-08T06:31:47.450537+02:00
+
+Path handling:
+Machine-specific absolute filesystem paths have been replaced with repository-relative paths.
+The experiment's recorded source-file fingerprints and experimental settings are retained.
+This public manifest is intended to describe the packaged repository layout; it does not claim that the original execution directory is reproducible or that all intermediate simulation files were archived.
+
+Repository root: .
+Network file: networks/Net3.inp
+Network SHA256: d95b068194ba747605bea851d608333e577ac667658aaa1680cf1c07e43faf53
+Junction-only DQN engine: src/dqn_engine_junction_only.py
+Engine SHA256: 00cdb5a537af5141f79b58715f6fad561829d23e870696db9fc3aadfb504cc59
+Experiment script: src/108_net3_junction_only_budget_sensitivity.py
+Experiment script SHA256: 96fb8bf95b319c381451b0e2341f6078990775757b3d1e7e156719d5607ee249
+
+Network: Net3_JunctionOnly
+Total graph nodes: 97
+Junction candidates: 92
+Tanks excluded from candidate set: 3
+Reservoirs excluded from candidate set: 2
+Candidate eligibility: junctions only (WaterNetworkModel.junction_name_list)
+Budgets: [3, 5, 8]
+Baseline budget: 5
+Seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Episodes per run: 1000
+Total planned DQN runs: 30
+Coverage weight: 0.7
+Centrality weight: 0.3
+Replay buffer: True
+Target network: True
+DQN architecture: Linear(92,128)-ReLU-Linear(128,64)-ReLU-Linear(64,32)-ReLU-Linear(32,92)
+Optimizer: Adam; learning rate: 0.0005
+Replay buffer capacity: 50000; batch size: 64
+Discount factor: 0.99
+Epsilon: 1.0 to 0.01; decay: 0.995
+Target network synchronization: every 100 episodes
+
+Contamination events per trained placement: 20
+Contamination source concentration: 0.1 kg/m^3 (= 100 mg/L)
+Detection threshold: 0.01 kg/m^3 (= 10 mg/L)
+Source type: SETPOINT
+Contamination pattern: [1] (constant)
+Source junctions: ['10', '15', '20', '35', '40', '50', '60', '601', '61', '101', '103', '105', '107', '109', '111', '113', '115', '117', '119', '120']
+Quality parameter: CHEMICAL
+Simulation duration: 24.0 hours
+Hydraulic timestep: 1.0 hour
+Quality timestep: 1.0 hour
+Report timestep: 1.0 hour
+Detection rule: any selected sensor concentration strictly greater than threshold
+
+Python: 3.12.10
+WNTR: 1.5.0
+PyTorch: 2.15.0+cpu
+NumPy: 2.5.4
+Pandas: 3.1.0
+
+EPANET engine version: 2.2
+EPANET version provenance: identified from the EPANET simulation report generated during the experiment.
+EPANET invocation: WNTR 1.5.0 through wntr.sim.EpanetSimulator.
+
+Output policy: dated, dedicated directory; script refuses to run if it already exists.
+Historical experiment files and prior reevaluation outputs were not modified by the original experiment execution.
+
+End of public reproducibility manifest.

@@ -1,0 +1,10 @@
+﻿# Direct third-party dependencies for the Net3 junction-only experiments
+# Versions recorded from the experimental Python environment.
+
+numpy==2.5.4
+pandas==3.1.0
+WNTR==1.5.0
+torch==2.15.0+cpu
+scipy==1.18.1
+networkx==3.7
+six==1.17.0

@@ -1,0 +1,7 @@
+Outcome,Comparison,Budget_A,Budget_B,U_statistic,P_value,Rank_biserial_correlation,Holm_adjusted_P_value,Significant_after_Holm
+Detection rate (%),3 vs 5,3,5,29.0,0.09214467234885225,-0.42000000000000004,0.09214467234885225,False
+Detection rate (%),3 vs 8,3,8,14.0,0.0045367606185216566,-0.72,0.01361028185556497,True
+Detection rate (%),5 vs 8,5,8,26.0,0.042813850623972936,-0.48,0.08562770124794587,False
+Mean detection time (hours),3 vs 5,3,5,64.5,0.28973706282213785,0.29000000000000004,0.4526028635399666,False
+Mean detection time (hours),3 vs 8,3,8,85.0,0.009108496398030965,0.7,0.027325489194092896,True
+Mean detection time (hours),5 vs 8,5,8,66.5,0.2263014317699833,0.33000000000000007,0.4526028635399666,False

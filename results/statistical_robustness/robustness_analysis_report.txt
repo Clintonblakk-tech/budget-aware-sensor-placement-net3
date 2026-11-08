@@ -1,0 +1,42 @@
+PAPER 2 — NET3 JUNCTION-ONLY STATISTICAL ROBUSTNESS CHECK
+====================================================================
+Input: results/statistical_robustness/input_run_level_values.csv
+Input SHA-256: 868767bfea3ae9eef23dadbef1d1b053a0f2197423b47c1a215b38a88977dcbb
+Output: results/statistical_robustness/
+Generated UTC: 2026-11-08T06:06:39.788384+00:00
+Python: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+Platform: Windows-11-10.0.26100-SP0
+NumPy: 2.5.4
+Pandas: 3.1.0
+SciPy: 1.18.1
+KW Monte Carlo permutations: 500000
+Permutation RNG seed: 20261108
+
+VALIDATION: PASSED
+30 completed Net3 junction-only runs; 10 per budget.
+Seeds 1–10 represented in each budget group.
+20 events per run; zero recorded training/event errors.
+Original experiment data were read only.
+
+OVERALL TESTS
+                          Outcome  NPerBudget  TotalRuns  KruskalWallisH  AsymptoticP  PermutationP  PermutationCount  PermutationExtremeCount  MonteCarloSE  EpsilonSquared
+               Detection rate (%)          10         30       10.429051     0.005437      0.003456            500000                     1727      0.000083        0.312187
+Run-level mean detection time (h)          10         30        6.591965     0.037032      0.032904            500000                    16451      0.000252        0.170073
+
+PAIRWISE EXHAUSTIVE EXACT PERMUTATION TESTS
+                          Outcome Comparison  N1  N2    U  ExactExtremeAllocations  ExactTotalAllocations  ExactPermutationP  AsymptoticP  RankBiserial  MeanDifference_Group1MinusGroup2  MedianDifference_Group1MinusGroup2  UniqueValuesPooled  TieCountExcess  ExactHolmAdjustedP  AsymptoticHolmAdjustedP  ExactSignificantAt005  AsymptoticSignificantAt005
+               Detection rate (%)     3 vs 5  10  10 29.0                    22852                 184756           0.123687     0.092145         -0.42                         -7.500000                           -5.000000                   5              15            0.149321                 0.092145                  False                       False
+               Detection rate (%)     3 vs 8  10  10 14.0                      966                 184756           0.005229     0.004537         -0.72                        -11.000000                           -5.000000                   7              13            0.015686                 0.013610                   True                        True
+               Detection rate (%)     5 vs 8  10  10 26.0                    13794                 184756           0.074661     0.042814         -0.48                         -3.500000                            0.000000                   4              16            0.149321                 0.085628                  False                       False
+Run-level mean detection time (h)     3 vs 5  10  10 64.5                    53350                 184756           0.288759     0.289737          0.29                          0.589531                            0.621849                  19               1            0.450129                 0.452603                  False                       False
+Run-level mean detection time (h)     3 vs 8  10  10 85.0                     1264                 184756           0.006841     0.009108          0.70                          1.462321                            1.563025                  20               0            0.020524                 0.027325                   True                        True
+Run-level mean detection time (h)     5 vs 8  10  10 66.5                    41582                 184756           0.225064     0.226301          0.33                          0.872790                            0.941176                  19               1            0.450129                 0.452603                  False                       False
+
+INTERPRETATION NOTES
+- Overall Kruskal-Wallis p-values are Monte Carlo permutation estimates with fixed group sizes and plus-one correction.
+- Pairwise p-values enumerate all 184,756 label allocations for each 10-versus-10 comparison; average ranks accommodate ties.
+- Holm adjustment is applied separately to the three pairwise comparisons for each outcome.
+- Permutation inference requires exchangeability of run-level observations under the null. Matching seed labels alone do not establish paired/common-random-number design.
+- Detection time remains conditional on detected events and must be interpreted jointly with detection rate.
+- These are sensitivity analyses on the retained 30 runs, not independent replication of the DQN training or EPANET simulations.
+- With n=10 per group, p-values should be accompanied by effect sizes and descriptive distributions; do not treat a threshold crossing as proof of a large or operationally important effect.

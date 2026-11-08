@@ -1,0 +1,223 @@
+﻿NET3 JUNCTION-ONLY BUDGET-SENSITIVITY EXPERIMENT
+FINAL EXPERIMENTAL AUDIT RECORD
+
+Paper:
+Budget-Aware Explainable Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks
+
+Audit date: 2026-11-08
+Network: Net3
+Experiment status: COMPLETED AND VERIFIED
+
+============================================================
+1. EXPERIMENTAL CONFIGURATION
+============================================================
+
+Network graph nodes: 97
+Junction candidates: 92
+Excluded tanks: 3
+Excluded reservoirs: 2
+Candidate eligibility: Junctions only
+
+Sensor budgets: 3, 5, 8
+Baseline budget: 5
+Random seeds: 1-10
+Training episodes per run: 1000
+Total training runs: 30
+
+Coverage weight: 0.70
+Centrality weight: 0.30
+Replay buffer: Enabled
+Target network: Enabled
+
+DQN architecture:
+Linear(92,128)-ReLU-Linear(128,64)-ReLU-
+Linear(64,32)-ReLU-Linear(32,92)
+
+Optimizer: Adam
+Learning rate: 0.0005
+Replay buffer capacity: 50000
+Batch size: 64
+Discount factor: 0.99
+Epsilon: 1.0 to 0.01
+Epsilon decay: 0.995
+Target network synchronization: Every 100 episodes
+
+============================================================
+2. CONTAMINATION-EVALUATION CONFIGURATION
+============================================================
+
+Contamination sources per trained placement: 20
+Total planned contamination events: 600
+
+Source concentration: 0.1 kg/m3 (100 mg/L)
+Detection threshold: 0.01 kg/m3 (10 mg/L)
+Source type: SETPOINT
+Contamination pattern: Constant [1]
+Quality parameter: CHEMICAL
+
+Simulation duration: 24 hours
+Hydraulic timestep: 1 hour
+Quality timestep: 1 hour
+Reporting timestep: 1 hour
+
+Detection rule:
+At least one selected sensor has a concentration
+strictly greater than 0.01 kg/m3.
+
+============================================================
+3. VERIFIED EXPERIMENTAL RESULTS
+============================================================
+
+Budget 3:
+Runs: 10
+Mean best reward: 0.397538
+SD best reward: 0.011318
+Mean final reward: 0.363927
+SD final reward: 0.044303
+Mean training runtime: 13.595023 seconds
+Mean detection rate: 75.5%
+SD detection rate: 14.990738
+Detected events: 151/200
+Event errors: 0
+
+Budget 5:
+Runs: 10
+Mean best reward: 0.849145
+SD best reward: 0.041062
+Mean final reward: 0.702296
+SD final reward: 0.136819
+Mean training runtime: 25.840091 seconds
+Mean detection rate: 83.0%
+SD detection rate: 2.581989
+Detected events: 166/200
+Event errors: 0
+
+Budget 8:
+Runs: 10
+Mean best reward: 1.789940
+SD best reward: 0.068158
+Mean final reward: 1.432699
+SD final reward: 0.202744
+Mean training runtime: 40.520440 seconds
+Mean detection rate: 86.5%
+SD detection rate: 4.116363
+Detected events: 173/200
+Event errors: 0
+
+Overall:
+Successful training runs: 30/30
+Contamination events recorded: 600/600
+Detected events: 490
+Undetected events: 110
+Event simulation errors: 0
+Overall detection rate: 81.67%
+
+============================================================
+4. JUNCTION-ONLY VALIDATION
+============================================================
+
+Actual Net3 junctions: 92
+Training placements checked: 30
+Placement errors: 0
+Unique contamination sources: 20
+Non-junction contamination sources: 0
+
+All placements contained exactly the prescribed sensor budget.
+All selected sensors belonged to the Net3 junction set.
+
+Validation result: PASSED
+
+============================================================
+5. ARTIFACT-INTEGRITY VALIDATION
+============================================================
+
+Training records: 30
+Completed training records: 30
+Training errors: 0
+
+DQN model files: 30
+Non-empty model files: 30
+
+Reward-history files: 30
+Records per reward history: 1000
+Sequential episode histories: 30
+Invalid reward histories: 0
+
+Event records: 600
+Event errors: 0
+
+Network SHA256:
+d95b068194ba747605bea851d608333e577ac667658aaa1680cf1c07e43faf53
+
+Junction-only DQN engine SHA256:
+00cdb5a537af5141f79b58715f6fad561829d23e870696db9fc3aadfb504cc59
+
+Experiment script SHA256:
+96fb8bf95b319c381451b0e2341f6078990775757b3d1e7e156719d5607ee249
+
+All three current source-file hashes matched the experiment manifest.
+
+============================================================
+6. SOFTWARE ENVIRONMENT
+============================================================
+
+Python: 3.12.10
+WNTR: 1.5.0
+PyTorch: 2.15.0+cpu
+NumPy: 2.5.4
+Pandas: 3.1.0
+
+============================================================
+7. OUTPUT EVIDENCE
+============================================================
+
+net3_junction_only_run_results.csv
+net3_junction_only_event_results.csv
+net3_junction_only_summary.csv
+net3_junction_only_manifest.txt
+
+30 DQN model-weight files.
+30 reward-history CSV files.
+
+============================================================
+8. SCIENTIFIC INTERPRETATION NOTES
+============================================================
+
+Detection performance increased across the tested budgets:
+75.5% at budget 3,
+83.0% at budget 5,
+86.5% at budget 8.
+
+Budget 5 exhibited the lowest detection-rate variability.
+Budget 8 achieved the highest mean detection rate.
+
+Higher sensor budgets also required longer mean training times.
+
+Reward magnitudes should be interpreted cautiously across budgets
+because the number of selected sensors differs.
+
+The historical unrestricted experiments and their results remain
+separate from this junction-only experiment.
+
+The earlier historical concentration-unit issue must not be
+silently corrected or conflated with these new results.
+
+This audit record documents verification of the generated
+experiment outputs. It does not constitute an independent
+reproduction on a separate machine.
+
+============================================================
+9. FINAL AUDIT STATUS
+============================================================
+
+Training verification: PASSED
+Contamination-event verification: PASSED
+Junction-only verification: PASSED
+Source-file hash verification: PASSED
+Model-file verification: PASSED
+Reward-history verification: PASSED
+
+Overall experimental audit:
+PASSED - VERIFIED EXPERIMENTAL EVIDENCE
+
+END OF AUDIT RECORD

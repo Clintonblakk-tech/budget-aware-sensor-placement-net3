@@ -1,0 +1,60 @@
+STATISTICAL ANALYSIS REPORT
+Paper 2: Budget-Aware Explainable Deep Reinforcement Learning for Sensor Placement in Water Distribution Networks
+===========================================================================
+
+Analysis date: 2026-11-08T07:33:01.621975
+Input file: results/statistical_robustness/input_run_level_values.csv
+Python version: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+Platform: Windows-11-10.0.26100-SP0
+NumPy version: 2.5.4
+Pandas version: 3.1.0
+SciPy version: 1.18.1
+
+EXPERIMENTAL UNIT
+---------------------------------------------------------------------------
+The independent unit of replication is the trained DQN run. There are ten runs per sensor budget and thirty runs overall. The 200 contamination events evaluated per budget are not treated as 200 independent training replicates.
+
+DESCRIPTIVE STATISTICS
+---------------------------------------------------------------------------
+                    Outcome  Budget  N      Mean        SD    Median        Q1        Q3      IQR   Minimum   Maximum
+         Detection rate (%)       3 10 75.500000 14.990738 80.000000 76.250000 83.750000 7.500000 35.000000 85.000000
+         Detection rate (%)       5 10 83.000000  2.581989 85.000000 80.000000 85.000000 5.000000 80.000000 85.000000
+         Detection rate (%)       8 10 86.500000  4.116363 85.000000 85.000000 88.750000 3.750000 80.000000 95.000000
+Mean detection time (hours)       3 10  5.690266  1.130378  5.798319  5.213235  6.404762 1.191527  3.500000  7.176471
+Mean detection time (hours)       5 10  5.100735  1.369586  5.176471  3.859375  6.012868 2.153493  3.375000  7.705882
+Mean detection time (hours)       8 10  4.227945  0.528832  4.235294  3.911765  4.579861 0.668096  3.411765  5.166667
+
+KRUSKAL-WALLIS TESTS
+---------------------------------------------------------------------------
+                    Outcome             Test  H_statistic  Degrees_of_freedom  P_value  Epsilon_squared  Significant_at_0.05
+         Detection rate (%) Kruskal-Wallis H    10.429051                   2 0.005437         0.312187                 True
+Mean detection time (hours) Kruskal-Wallis H     6.591965                   2 0.037032         0.170073                 True
+
+PAIRWISE MANN-WHITNEY TESTS
+---------------------------------------------------------------------------
+                    Outcome Comparison  Budget_A  Budget_B  U_statistic  P_value  Rank_biserial_correlation  Holm_adjusted_P_value  Significant_after_Holm
+         Detection rate (%)     3 vs 5         3         5         29.0 0.092145                      -0.42               0.092145                   False
+         Detection rate (%)     3 vs 8         3         8         14.0 0.004537                      -0.72               0.013610                    True
+         Detection rate (%)     5 vs 8         5         8         26.0 0.042814                      -0.48               0.085628                   False
+Mean detection time (hours)     3 vs 5         3         5         64.5 0.289737                       0.29               0.452603                   False
+Mean detection time (hours)     3 vs 8         3         8         85.0 0.009108                       0.70               0.027325                    True
+Mean detection time (hours)     5 vs 8         5         8         66.5 0.226301                       0.33               0.452603                   False
+
+STATISTICAL INTERPRETATION
+---------------------------------------------------------------------------
+
+Detection rate (%): Kruskal-Wallis H = 10.4291, df = 2, p = 0.005437.
+There is evidence of a difference among the budget groups.
+
+Mean detection time (hours): Kruskal-Wallis H = 6.5920, df = 2, p = 0.037032.
+There is evidence of a difference among the budget groups.
+
+Pairwise comparisons use two-sided Mann-Whitney U tests with Holm correction across the three budget comparisons within each outcome.
+
+Detection-time results are conditional on successful detection. Events that were not detected do not contribute a detection time. This outcome must therefore be interpreted alongside detection rate.
+
+These tests assess differences among the three Net3 junction-only budget groups. They do not establish generalisability to other water distribution networks.
+
+The tests use asymptotic p-values. With ten independent training runs per group, inferential findings should be interpreted cautiously.
+
+This report is a derived statistical analysis of the existing experiment. It does not rerun DQN training or modify original experimental records.

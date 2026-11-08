@@ -1,0 +1,13 @@
+﻿Paper 2 Net3 junction-only statistical robustness manifest
+Input file: results/statistical_robustness/input_run_level_values.csv
+Input SHA-256: 868767bfea3ae9eef23dadbef1d1b053a0f2197423b47c1a215b38a88977dcbb
+Permutation count: 500000
+Permutation seed: 20261108
+Pairwise exact allocations per comparison: 184756
+
+Output SHA-256 values:
+868767bfea3ae9eef23dadbef1d1b053a0f2197423b47c1a215b38a88977dcbb  input_run_level_values.csv
+bc435ddb55b219993228feea4f695ff6fcf9a2e2c34348da0041527abf2cdd94  overall_permutation_tests.csv
+9a4ed031c51af12bc9b266c06b5eafc16024208e42264bfb33ecf7a2f277dbde  pairwise_exact_permutation_tests.csv
+b2d3998316c5e3b1ef85a5d2b0311d22e754530bfd0533ee3420f700d59f81f8  robustness_analysis_report.txt
+cc066d3e31ec35cd15856c521a34dea4dd0d9aca80d0ebd19a88ae083b1283b2  tie_and_distribution_diagnostics.csv
